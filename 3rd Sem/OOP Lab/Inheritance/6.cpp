@@ -12,86 +12,33 @@ display the final result for a student.
 
 */
 
-#include <bits/stdc++.h>
+#include<iostream>
+#include<cmath>
 using namespace std;
-#define endl '\n'
-
-class Student_762
-{
-protected:
-    int roll_762;
-    string name_762;
-    string section_762;
-
-public:
-    Student_762()
-    {
-        cout << "Enter roll: ";
-        cin >> roll_762;
-        cout << "Enter name: ";
-        cin.ignore();
-        getline(cin, name_762);
-        cout << "Enter section: ";
-        cin >> section_762;
+int main(){
+    float a,b,c,x1,x2;
+    cout<<"Enter the coefficients of a,b and c: ";
+    cin>>a>>b>>c;
+    int discriminant=b*b-4*a*c;
+    int i,r;
+    if(discriminant>0){
+        x1=(-b+discriminant)/(2*a);
+        x2=(-b-discriminant)/(2*a);
+        cout<<"Roots are real and diferent"<<endl;
+        cout<<"Root 1= "<<x1<<endl;
+        cout<<"Root 2= "<<x2<<endl;
     }
-};
-
-class Test_762 : virtual protected Student_762
-{
-protected:
-    int mark_762[5];
-
-public:
-    Test_762()
-    {
-        for (int i = 0; i < 5; i++)
-        {
-            cout << "Enter mark in subject " << i + 1 << ": ";
-            cin >> mark_762[i];
-        }
+    else if(discriminant==0){
+        x1=x2=b/(2*a);
+        cout<<"Roots are real and equal"<<endl;
+        cout<<"Root 1 and Root 2= "<<x1;
     }
-};
-class Sport_762 : virtual protected Student_762
-{
-protected:
-    int score_762;
-
-public:
-    Sport_762()
-    {
-        cout << "Enter score in sport: ";
-        cin >> score_762;
+    else if(discriminant<0){
+        r=-b/(2*a);
+        i=sqrt(-discriminant/(2*a));
+        cout<<"Roots are complex and different"<<endl;
+        cout<<"Root 1= "<<r<<"+"<<i<<endl;
+        cout<<"Root 2= "<<r<<"-"<<i<<endl;
     }
-};
-
-class Result_762 : private Test_762, private Sport_762
-{
-private:
-    int total_762;
-
-public:
-    Result_762()
-    {
-        total_762 = score_762;
-        for (int i = 0; i < 5; i++)
-        {
-            total_762 += mark_762[i];
-        }
-    }
-    void display_762()
-    {
-        cout << endl
-             << "Name: " << name_762 << endl
-             << "Roll: " << roll_762 << endl
-             << "Section: " << section_762 << endl
-             << "Total mark: " << total_762 << endl;
-    }
-};
-
-int main()
-{
-    Result_762 r;
-    r.display_762();
-
     return 0;
 }
